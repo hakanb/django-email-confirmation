@@ -14,6 +14,8 @@ from emailconfirmation.signals import email_confirmed
 from emailconfirmation.utils import get_send_mail
 send_mail = get_send_mail()
 
+from django_mailer.constants import PRIORITY_HIGH
+
 # this code based in-part on django-registration
 
 class EmailAddressManager(models.Manager):
@@ -115,7 +117,7 @@ class EmailConfirmationManager(models.Manager):
         message = render_to_string(
             "emailconfirmation/email_confirmation_message.txt", context)
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
-                  [email_address.email], priority="high")
+                  [email_address.email], priority=PRIORITY_HIGH)
         return self.create(
             email_address=email_address,
             sent=datetime.now(),
