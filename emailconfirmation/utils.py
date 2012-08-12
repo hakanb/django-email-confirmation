@@ -6,7 +6,7 @@ def get_send_mail():
     deals with incompatibilities between signatures.
     """
     # favour django-mailer but fall back to django.core.mail
-    if "mailer" in settings.INSTALLED_APPS:
+    if "django_mailer" in settings.INSTALLED_APPS:
         from mailer import send_mail
     else:
         from django.core.mail import send_mail as _send_mail
